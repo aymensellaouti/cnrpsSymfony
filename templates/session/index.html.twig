@@ -1,1 +1,7 @@
-{{ app.session.get('user') }}
+<ol>
+{% for name, numero in app.session.get('users') %}
+<li>    {{ name }} : {{ numero }}</li>
+{% else %}
+</ol>
+<h1>Vous n'avez encore aucun utilisateur</h1>
+{% endfor %}

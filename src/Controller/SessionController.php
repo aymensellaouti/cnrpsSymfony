@@ -14,14 +14,54 @@ class SessionController extends AbstractController
     public function index(Request $request)
     {
         $session = $request->getSession();
-        if ($session->has('user')) {
-           $user = $session->get('user');
-           $user = 'change Value';
-           $session->set('user', $user);
-        } else {
-            $user = 'new Value';
-            $session->set('user', $user);
+        if (! $session->has('users')) {
+            $users = [];
+            $session->set('users', $users);
         }
         return $this->render('session/index.html.twig');
+    }
+
+    /**
+     * @param Request $request
+     * @param $name
+     * @param $numero
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("session/add/{name}/{numero}",
+     *      name="users.add")
+     */
+    public function add(Request $request, $name, $numero) {
+        /*
+         * Si il y a une session
+         * on ajoute le user et on le redirige vers la liste
+         * sinon on le redirige vers la liste
+         * */
+         $session = $request->getSession();
+         if ($session->has('users')) {
+             $users = $session->get('users');
+             $users[$name] = $numero;
+             $session->set('users', $users);
+         }
+         return $this->redirectToRoute('session');
+    }
+
+    /**
+     * @param Request $request
+     * @param $name
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/session/delete/{name}", name="session.delete")
+     */
+    public function delete(Request $request, $name) {
+        /*
+         * Si il y a une session
+         * on ajoute le user et on le redirige vers la liste
+         * sinon on le redirige vers la liste
+         * */
+        $session = $request->getSession();
+        if ($session->has('users')) {
+            $users = $session->get('users');
+            unset ($users[$name]);
+            $session->set('users', $users);
+        }
+        return $this->redirectToRoute('session');
     }
 }
