@@ -26,4 +26,11 @@ class FormationController extends AbstractController
             'veille' => 'sonia'
         ]);
     }
+
+    /**
+     * @Route("/heritage", name="heritage")
+     */
+    public function heritage() {
+        return $this->render('formation/heritage.html.twig');
+    }
 }

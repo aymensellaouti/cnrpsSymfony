@@ -6,10 +6,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class SessionController
+ * @package App\Controller
+ * @Route("/session")
+ */
 class SessionController extends AbstractController
 {
     /**
-     * @Route("/session", name="session")
+     * @Route("/", name="session")
      */
     public function index(Request $request)
     {
@@ -26,8 +31,9 @@ class SessionController extends AbstractController
      * @param $name
      * @param $numero
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @Route("session/add/{name}/{numero}",
-     *      name="users.add")
+     * @Route("/add/{name?mohamed}/{numero<\d{8}>}",
+     *      name="users.add",
+     * )
      */
     public function add(Request $request, $name, $numero) {
         /*
@@ -48,7 +54,7 @@ class SessionController extends AbstractController
      * @param Request $request
      * @param $name
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @Route("/session/delete/{name}", name="session.delete")
+     * @Route("/delete/{name}", name="session.delete")
      */
     public function delete(Request $request, $name) {
         /*

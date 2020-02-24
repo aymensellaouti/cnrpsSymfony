@@ -1,12 +1,11 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
-</html>
+<h1>
+    {% block head %}
+        Head of parent
+    {% endblock %}
+</h1>
+<hr>
+{% block body %}
+    Ici c'est le corps du body par défaut
+{% endblock %}
+<hr>
+<h2>Footer</h2>

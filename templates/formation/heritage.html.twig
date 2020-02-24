@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h3>Je suis le nouveau contenu du block</h3>
+{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+    <hr>
+    HH je suis le nouveau head
+{% endblock %}
