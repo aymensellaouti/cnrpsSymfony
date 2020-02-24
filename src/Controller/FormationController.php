@@ -12,9 +12,7 @@ class FormationController extends AbstractController
      */
     public function index()
     {
-        return $this->render('formation/index.html.twig', [
-            'controller_name' => 'FormationController',
-        ]);
+        return $this->render('base.html.twig');
     }
     /**
      * @Route("/bonjours/{name}")
