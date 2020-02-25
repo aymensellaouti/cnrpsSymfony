@@ -1,0 +1,9 @@
+1 - Télécharger le zip ou clone le projet
+2 - Lancer composer install (dans le directory du projet)
+3 - Aller sous public et lancer npm install
+4 - Creer la base de données : symfony console doctrine:database:create
+5 - lancer les migrations : php bin/console doctrine:migrations:migrate
+6 - Lancer les fixtures : symfony console doctrine:fixtures:load
+7 - Enjoy :D with : symfony serve
+
+
