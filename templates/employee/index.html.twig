@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des employées{% endblock %}
+
+{% block body %}
+
+    {% for employee in employees %}
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{employee.fullName}}</h5>
+                <p class="card-text">{{employee.adresse}}</p>
+                <p class="card-text">Née le : {{employee.dateNaissance|date('Y-M-D')}}</p>
+                <a href="#" class="btn btn-primary">Delete</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}
