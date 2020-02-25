@@ -19,7 +19,7 @@ class EmployeeController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Employee::class);
         $employees = $repository->findAll();
         return $this->render('employee/index.html.twig', [
-            'employees' => $employees
+            'listeDesEmployees' => $employees
         ]);
     }
 
@@ -37,5 +37,15 @@ class EmployeeController extends AbstractController
         $manager->persist($employee);
         $manager->flush();
         return $this->redirectToRoute('employee.list');
+    }
+
+    /**
+     * @param $id
+     * @Route("/{id}", name="employee.profil")
+     */
+    public function employeeProfil(Employee $employee=null) {
+        return $this->render('employee/profile.html.twig',[
+            'employee' => $employee
+        ]);
     }
 }
