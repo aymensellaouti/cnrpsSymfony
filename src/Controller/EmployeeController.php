@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Employee;
+use App\Form\EmployeeType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -26,7 +28,7 @@ class EmployeeController extends AbstractController
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
-     * @Route("/add/{name}/{adresse}", name="employee.add")
+     * @Route("/add/{name}/{adresse}", name="employee.add.random")
      */
     public function addSomeRandomEmployee($name, $adresse) {
         $manager = $this->getDoctrine()->getManager();
@@ -37,6 +39,25 @@ class EmployeeController extends AbstractController
         $manager->persist($employee);
         $manager->flush();
         return $this->redirectToRoute('employee.list');
+    }
+
+    /**
+     * @Route("/add/{id?0}", name="employee.add")
+     */
+    public function addEmployee(Request $request, Employee $employee = null) {
+        if (!$employee)
+            $employee = new Employee();
+        $form = $this->createForm(EmployeeType::class, $employee);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($employee);
+            $manager->flush();
+            return $this->redirectToRoute('employee.list');
+        }
+        return $this->render('employee/add.html.twig',  [
+           'form' => $form->createView()
+        ]);
     }
 
     /**

@@ -54,4 +54,9 @@ class Cin
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->getNumero(). ' created at '.$this->getCreatedAt()->format('Y-M-D');
+    }
 }
